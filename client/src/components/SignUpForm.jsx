@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { UseAuthStore } from "../Store/UseAuthStore.js";
+import { UseAuthStore } from "../Store/UseAuthStore";
+import { Link } from "react-router-dom";
 
 const SignUpForm = () => {
   const [name, setName] = useState("");
@@ -18,6 +19,7 @@ const SignUpForm = () => {
       onSubmit={(e) => {
         e.preventDefault();
         signup({ name, email, password, gender, age, genderPreference });
+        <Link to='/'></Link>
       }}
     >
       {/* NAME */}

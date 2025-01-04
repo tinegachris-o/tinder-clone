@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage.jsx";
 import AuthPage from "./pages/AuthPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import ChatPage from "./pages/chatPage.jsx";
-import { UseAuthStore } from "./Store/UseAuthStore.js";
+import { UseAuthStore } from "./Store/UseAuthStore";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 function App() {
@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     checkAuthUser();
   }, [checkAuthUser]);
-  if(checkingAuthUser)return <p>loading...</p>
+  if(checkingAuthUser) return null
   
   return (
     <div>
@@ -29,6 +29,7 @@ function App() {
           path="/auth"
           element={!authUser ? <AuthPage /> : <Navigate to={"/"} />}
         />
+
         <Route
           path="/profile"
           element={authUser ? <ProfilePage /> : <Navigate to={"/auth"} />}

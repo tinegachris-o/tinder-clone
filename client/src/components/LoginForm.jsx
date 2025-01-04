@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UseAuthStore } from "../Store/UseAuthStore";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 
 const LoginForm = () => {
   const [password, setPassword] = useState("");
@@ -13,12 +13,11 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-     const token= await login({ email, password }); // Await login
-if(token){
-  Cookies.set("token", token, { expires: 30 }); // Store the token in a cookie, expires in 30 days
+     await login({ email, password }); // Await login
 
-  navigate("/home"); // Redirect to the homepage
-}
+  //Cookies.set("token", token, { expires: 30 }); // Store the token in a cookie, expires in 30 days
+
+  //navigate("/"); // Redirect to the homepage
     } catch (error) {
       console.error("Login failed:", error);
     }

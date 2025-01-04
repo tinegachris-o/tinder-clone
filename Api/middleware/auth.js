@@ -6,7 +6,8 @@ dotenv.config({ path: "/home/tinega/Documents/tinderclone/Api/.env" });
 
 export const protectRoute = async (req, res, next) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1]; // Extract token from Bearer
+    const token =req.cookies.jwt
+     ///////req.headers.authorization?.split(" ")[1]; // Extract token from Bearer
 
     if (!token) {
       return res.status(400).json({

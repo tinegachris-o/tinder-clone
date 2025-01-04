@@ -1,0 +1,6 @@
+#This is a simple version of tinder app
+#Am using reactjs ,zustand for statemanagment 
+in frontend and in backend i use mongodb,cloudinary
+,for authorizarion i use json webtoken, for hashing password i use bcryptjs
+#i hope it is gonna make a good expereince to any customer using it 
+![Full Stack Tinder](client/public/tibderimage.png)

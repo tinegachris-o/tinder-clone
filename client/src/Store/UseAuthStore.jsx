@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../libs/axios.js";
 import toast from "react-hot-toast";
-
+import { Link } from "react-router-dom";
 export const UseAuthStore = create((set) => ({
   authUser: null,
   checkingAuthUser: true,
@@ -21,15 +21,12 @@ export const UseAuthStore = create((set) => ({
   login: async (loginData) => {
     try {
       set({ loading: true });
-      const res = await axiosInstance.post("/auth/login", loginData);
-      console.log('user is logging in',res);
-
-      if (res?.data?.user) {
-        set({ authUser: res.data.user });
+      const response = await axiosInstance.post("/auth/login", loginData);
+      console.log('user is logging in',response);
+        set({ authUser: response.data.user });
         toast.success("user logged in successfully");
-      } else {
-        res.send("invalid response structure");
-      }
+      <Link to="/">Home page</Link>
+
     } catch (error) {
       console.error("error logging in", error.message);
       toast.error(error.response.data.message || "error in login");
@@ -49,9 +46,9 @@ export const UseAuthStore = create((set) => ({
   },
   checkAuthUser: async () => {
     try {
-      const res = await axiosInstance.get("/auth/me");
-      console.log("this is authenticated data", res.data);
-      set({ authUser: res.data.user });
+      const response = await axiosInstance.get("/auth/me");
+      console.log("this is authenticated data", response.data);
+      set({ authUser: response.data.user });
     } catch (error) {
       set({ authUser: null });
       console.log(error);
