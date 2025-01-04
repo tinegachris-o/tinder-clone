@@ -2,7 +2,11 @@
 
 #Tinder Projected developed by tinega@dev
 
+## User Experience
 
+The app is designed with a focus on simplicity and ease of use. It allows users to swipe through profiles and matches, enhancing their experience in a fun and engaging way.
+
+![Full Stack Tinder](tinder.png)
 # Full-Stack Tinder Clone
 
 This is a simple version of a Tinder app built with **ReactJS** for the frontend, using **Zustand** for state management. The backend is powered by **MongoDB**, **Cloudinary**, and **JSON Web Token (JWT)** for authentication. Passwords are securely hashed using **bcryptjs** to ensure user security. 
@@ -63,11 +67,7 @@ To run both the backend and frontend locally, open two terminals:
    npm run dev
    ```
 
-## User Experience
 
-The app is designed with a focus on simplicity and ease of use. It allows users to swipe through profiles and matches, enhancing their experience in a fun and engaging way.
-
-![Full Stack Tinder](tibderimage.png)
 
 ## Future Improvements
 
