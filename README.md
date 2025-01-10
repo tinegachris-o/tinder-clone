@@ -1,8 +1,9 @@
-
 # 🚀 **Tinder Clone – Build Your Perfect Match with tinega@dev** 💖
 ## 💡 **Experience the Ultimate Swipe Right!** 💡
 Your perfect match is just a swipe away! Fast, secure, and incredibly fun, this **Tinder Clone** app offers a **seamless user experience** and a **powerful tech stack**. Get ready to **swipe, match, and chat** in the most exciting way possible!
-![Full Stack Tinder](./tinder.png)
+
+![Full Stack Tinder](tinder.png)
+
 ---
 ## 🌟 **Why You'll Fall in Love with This App** 🌟
 - **🔒 Secure Your Profile**: With **JWT-based authentication**, we’ve got your back. Your data is always protected.
@@ -18,30 +19,35 @@ Your perfect match is just a swipe away! Fast, secure, and incredibly fun, this 
 - **Image Hosting**: ☁️ **Cloudinary** for seamless image uploads
 ## 🛠️ **Quick Setup – Ready in Minutes!** 🛠️
 1. **Clone the Repo**:
-   ```bash
+   
+bash
    git clone https://github.com/tinegachris-o/tinder-clone.git
-   ```
+
 2. **Install Dependencies**:
-   ```bash
+   
+bash
    npm install
-   ```
-3. **Set Up Your Environment**: Add the following variables to your `.env` file:
-   ```bash
+
+3. **Set Up Your Environment**: Add the following variables to your .env file:
+   
+bash
    MONGO_URI=mongodb://localhost:27017
    JWT_SECRET=your_jwt_secret
    CLOUDINARY_CLOUD_NAME=your_cloud_name
    CLOUDINARY_API_KEY=your_api_key
    CLOUDINARY_API_SECRET=your_api_secret
-   ```
+
 4. **Start the App**:
    - **Backend**: 
-     ```bash
+     
+bash
      npm start
-     ```
+
    - **Frontend**: 
-     ```bash
+     
+bash
      npm run dev
-     ```
+
 ## 🔮 **What's Coming Next?** 🔮
 - **💬 Real-Time Messaging**: Chat with your matches instantly and keep the conversation flowing.
 - **🎨 Next-Level UI/UX**: Get ready for a sleek, ultra-modern design that will wow you!
