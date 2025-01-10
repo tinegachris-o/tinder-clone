@@ -2,7 +2,7 @@
 # 🚀 **Tinder Clone – Build Your Perfect Match with tinega@dev** 💖
 ## 💡 **Experience the Ultimate Swipe Right!** 💡
 Your perfect match is just a swipe away! Fast, secure, and incredibly fun, this **Tinder Clone** app offers a **seamless user experience** and a **powerful tech stack**. Get ready to **swipe, match, and chat** in the most exciting way possible!
-![Full Stack Tinder](./tinder.png)
+![Full Stack Tinder](tinder.png)
 ---
 ## 🌟 **Why You'll Fall in Love with This App** 🌟
 - **🔒 Secure Your Profile**: With **JWT-based authentication**, we’ve got your back. Your data is always protected.
