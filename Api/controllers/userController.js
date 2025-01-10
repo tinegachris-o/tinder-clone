@@ -1,49 +1,44 @@
-import User from "../models/User.js";
 import cloudinary from "../config/cloudinary.js";
+import User from "../models/User.js";
 
 export const updateProfile = async (req, res) => {
+  // image => cloudinary -> image.cloudinary.your => mongodb
+
   try {
     const { image, ...otherData } = req.body;
-    const updatedData = { ...otherData };
 
-    // Handle image upload if it exists and is in the base64 format
-    if (image && image.startsWith("data:image")) {
-      try {
-        const uploadedResponse = await cloudinary.uploader.upload(image);
-        updatedData.image = uploadedResponse.secure_url;
-      } catch (uploadError) {
-        console.error("Error uploading image:", uploadError);
-        return res.status(500).json({
-          message: "Failed to upload image",
-          success: false,
-        });
+    let updatedData = otherData;
+
+    if (image) {
+      // base64 format
+      if (image.startsWith("data:image")) {
+        try {
+          const uploadResponse = await cloudinary.uploader.upload(image);
+          updatedData.image = uploadResponse.secure_url;
+        } catch (error) { 
+          console.error("Error uploading image:", error);
+
+          return res.status(400).json({
+            success: false,
+            message: "Error uploading image",
+          });
+        }
       }
     }
 
-    // Update the user profile
     const updatedUser = await User.findByIdAndUpdate(req.user.id, updatedData, {
       new: true,
     });
 
-    // Check if the user was found and updated
-    if (!updatedUser) {
-      return res.status(404).json({
-        message: "User not found",
-        success: false,
-      });
-    }
-
-    // Respond with success
     res.status(200).json({
-      message: "User has been updated successfully",
-      user: updatedUser,
       success: true,
+      user: updatedUser,
     });
   } catch (error) {
-    console.error("Internal server error:", error);
+    console.log("Error in updateProfile: ", error);
     res.status(500).json({
-      message: "Internal server error",
       success: false,
+      message: "Internal server error",
     });
   }
 };

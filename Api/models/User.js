@@ -39,10 +39,10 @@ const userSchema = new mongoose.Schema({
   disLikes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 },{timestamps:true});
-userSchema.pre("save", async function (next) {
+/*userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
   next();
-});
+});*/
 userSchema.methods.matchPassword = async function (enteredpassword) {
   return await bcrypt.compare(enteredpassword, this.password);
 };

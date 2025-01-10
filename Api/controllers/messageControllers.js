@@ -1,5 +1,5 @@
 import Message from "../models/Message.js";
-
+import {getConnectedUsers} from "../socket/socket.server.js"
 export const sendMessage = async (req, res) => {
   try {
     const { content, receiverId } = req.body;
@@ -8,6 +8,14 @@ export const sendMessage = async (req, res) => {
       receiver: receiverId,
       content,
     });
+    const io = getIO();
+    const connectedUsers = getConnectedUsers();
+    const receiverSocketId = connectedUsers.get(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverId).emit("newMessage", {
+        message: newMessage,
+      });
+    }
     res.status(200).json({ message: "message sent successfully", newMessage });
   } catch (error) {
     console.error("error in sending messsage route", error);
@@ -17,6 +25,8 @@ export const sendMessage = async (req, res) => {
   }
 };
 //TODO APP
+
+
 export const getConversation = async (req, res) => {
   try {
     const { userId } = req.params;

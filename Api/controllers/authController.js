@@ -4,11 +4,16 @@ import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 dotenv.config({ path: "Api/.env" });
 
-const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
-};
+//const signToken = (id) => {
+  //return jwt.sign({ id }, process.env.JWT_SECRET, {
+   // expiresIn: "30d",
+ // });
+//};
+const signToken=(id)=>{
+return jwt.sign({id},process.env.JWT_SECRET,{
+expiresIn:"31d"
+})
+}
 export const signup = async (req, res) => {
   try {
     const { name, email, password, gender, genderPreference, age } = req.body;
@@ -27,16 +32,9 @@ export const signup = async (req, res) => {
     if (password.length < 3) {
       return res.status(400).json({
         success: false,
-        message: "password must be atleast 6 characters ",
+        message: "password must be atleast 3 characters ",
       });
     }
-    //check exixsting user
-    //const exixstingUser= await User.findOne({email})
-    /*if(exixstingUser){
-  res.status(400).json({
-    message:"email already has been taken"
-  })
-}*/
 
     const existingUser = await User.checkIfExists(name, email);
 
@@ -47,10 +45,11 @@ export const signup = async (req, res) => {
       });
     }
     // new user
+    const hashedpassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       name,
       email,
-      password,
+      password: hashedpassword,
       age,
       gender,
       genderPreference,
@@ -66,6 +65,7 @@ export const signup = async (req, res) => {
     const { password: hash, ...others } = newUser.toObject();
     res.status(201).json({
       success: true,
+      message: `${newUser.name} created account sucessfully 🚀`,
       user: others,
     });
   } catch (error) {
@@ -80,13 +80,22 @@ export const login = async (req, res) => {
     if (!email || !password) {
       res.status(400).json({ message: "All fields are required" });
     }
-    const user = await User.findOne({ email }).select("+password");
-    if (!user || !(await user.matchPassword(password))) {
+    const user = await User.findOne({ email });
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!user && !validPassword) {
+      return res.status({
+        message: "invalid email or password",
+        success: "false",
+      });
+    }
+    /*if (!user || !(await user.matchPassword(password))) {
       return res.status(401).json({
         success: false,
         message: "invalid email or password",
       });
     }
+
+*/
     const token = signToken(user._id);
     res.cookie("jwt", token, {
       maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -95,13 +104,13 @@ export const login = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
     });
     res.status(200).json({
-      message: "welcome back ",
+      message: `welcome back ${user.name} 🚀🚀🚀🚀🚀🚀`,
       success: true,
       token: token, // Send token here
     });
   } catch (error) {
     res.status(500).json({
-      message: "internal server error",
+      message: "error in logging user",
     });
   }
 };

@@ -7,6 +7,7 @@ import {
 } from "../controllers/messageControllers.js";
 router.use(protectRoute);
 router.post("/send", sendMessage);
-router.get("/conversation/:senderId", getConversation);
+//router.get("/conversation/:senderId", getConversation);
+router.get("/conversation/:userId", getConversation);
 
 export default router;
